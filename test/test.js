@@ -9,7 +9,7 @@ import * as all from '../index.js'
 import JsonLdSerializer from '../lib/CustomJsonLdSerializer.js'
 import RdfXmlParser from '../lib/CustomRdfXmlParser.js'
 
-function testMediaType (map, mediaType, name, implementation) {
+function testMediaType(map, mediaType, name, implementation) {
   describe(mediaType, () => {
     it('should be supported', () => {
       strictEqual(map.has(mediaType), true)

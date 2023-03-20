@@ -10,7 +10,7 @@ const serializers = new SinkMap()
 
 const formats = {
   parsers,
-  serializers
+  serializers,
 }
 
 formats.parsers.set('application/ld+json', new JsonLdParser())
@@ -34,5 +34,5 @@ export {
   JsonLdSerializer,
   N3Parser,
   NTriplesSerializer,
-  RdfXmlParser
+  RdfXmlParser,
 }
