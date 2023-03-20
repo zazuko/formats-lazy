@@ -3,13 +3,12 @@ import JsonLdParser from '@rdfjs/parser-jsonld'
 import N3Parser from '@rdfjs/parser-n3'
 import NTriplesSerializer from '@rdfjs/serializer-ntriples'
 import SinkMap from '@rdfjs/sink-map'
-import { describe, it } from 'mocha'
 import formats from '../index.js'
 import * as all from '../index.js'
 import JsonLdSerializer from '../lib/CustomJsonLdSerializer.js'
 import RdfXmlParser from '../lib/CustomRdfXmlParser.js'
 
-function testMediaType(map, mediaType, name, implementation) {
+function testMediaType(map: SinkMap<any, any>, mediaType: string, name: string, implementation: any) {
   describe(mediaType, () => {
     it('should be supported', () => {
       strictEqual(map.has(mediaType), true)
