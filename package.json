@@ -5,6 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "prepare": "husky install",
     "lint": "eslint . --quiet",
     "test": "c8 --reporter=lcov --reporter=text mocha"
   },
@@ -43,7 +44,14 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-require-extensions": "^0.1.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
     "mocha": "^10.0.0",
     "standard": "^17.0.0"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix --quiet"
+    ]
   }
 }
