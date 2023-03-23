@@ -26,16 +26,14 @@ function testMediaType(map: SinkMap<any, any>, mediaType: string, name: string, 
     })
 
     it(`should use ${name}`, async () => {
-      const sink = map.get(mediaType)
+      const sink = <LazySink>map.get(mediaType)
 
-      expect(sink).to.be.instanceof(LazySink)
-      assert(sink instanceof LazySink)
       strictEqual(await sink.load() instanceof implementation, true)
     })
   })
 }
 
-describe('@rdfjs/formats-common', () => {
+describe('@zazuko/formats-lazy', () => {
   describe('exports', () => {
     it('should export all parsers as SinkMap', () => {
       strictEqual(all.parsers instanceof SinkMap, true)

@@ -14,7 +14,11 @@ interface LoadSink<C extends SinkConstructor<any>> {
 type SinkOutput<S> = S extends RDF.Sink<any, infer O> ? O : never
 type ConstructedFrom<C> = C extends SinkConstructor<infer S> ? S : never
 
-class LazySink<C extends SinkConstructor<any>> implements RDF.Sink<EventEmitter, EventEmitter> {
+export interface LazySink<C extends SinkConstructor<any> = any> extends RDF.Sink<EventEmitter, EventEmitter> {
+  load(): Promise<ConstructedFrom<C>>
+}
+
+class LazySinkImpl<C extends SinkConstructor<any>> implements LazySink<C> {
   readonly load: () => Promise<ConstructedFrom<C>>
 
   constructor(load: LoadSink<C>, ...args: ConstructorParameters<C>) {
@@ -29,8 +33,7 @@ class LazySink<C extends SinkConstructor<any>> implements RDF.Sink<EventEmitter,
     Promise.resolve()
       .then(async () => {
         const sink = await this.load()
-        // eslint-disable-next-line no-useless-call
-        const origStream = <Stream><unknown>sink.import.call(sink, <any>[stream, options])
+        const origStream = <Stream><unknown>sink.import(stream, options)
         origStream.on('prefix', (prefix, ns) => {
           passThrough.emit('prefix', prefix, ns)
         })
@@ -50,7 +53,7 @@ export interface SinkProxyConstructor<C extends SinkConstructor<any>> {
 }
 
 export function lazySink<C extends SinkConstructor<any>>(load: LoadSink<C>): SinkProxyConstructor<C> {
-  return class extends LazySink<C> {
+  return class extends LazySinkImpl<C> {
     constructor(...args: ConstructorParameters<C>) {
       super(load, ...args)
     }
