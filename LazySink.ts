@@ -16,6 +16,8 @@ type ConstructedFrom<C> = C extends SinkConstructor<infer S> ? S : never
 
 export interface LazySink<C extends SinkConstructor<any> = any> extends RDF.Sink<EventEmitter, EventEmitter> {
   load(): Promise<ConstructedFrom<C>>
+
+  import(stream: EventEmitter, options?: Parameters<ConstructedFrom<C>['import']>[1]): SinkOutput<ConstructedFrom<C>>
 }
 
 class LazySinkImpl<C extends SinkConstructor<any>> implements LazySink<C> {
