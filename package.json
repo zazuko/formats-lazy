@@ -7,7 +7,8 @@
   "scripts": {
     "lint": "eslint . --quiet --ext .ts",
     "prepack": "tsc",
-    "test": "c8 --reporter=lcov --reporter=text mocha test/test.ts"
+    "test": "c8 --reporter=lcov --reporter=text mocha test/test.ts",
+    "release": "changeset publish"
   },
   "files": [
     "*.js",
@@ -48,6 +49,7 @@
     "readable-stream": "^4"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.1",
     "@rdfjs/namespace": "^2",
     "@tpluscode/eslint-config": "^0.4.2",
     "@tpluscode/rdf-string": "^1.0.1",
