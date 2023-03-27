@@ -1,12 +1,9 @@
 import { Readable } from 'stream'
 import type { Sink } from '@rdfjs/types'
-import chai, { expect } from 'chai'
-import sinonChai from 'sinon-chai'
+import { expect } from 'chai'
 import sinon from 'sinon'
 import getStream from 'get-stream'
 import { lazySink } from '../LazySink.js'
-
-chai.use(sinonChai)
 
 describe('@zazuko/formats-lazy/lazySink', () => {
   class RealSink implements Sink<any, any> {
@@ -44,4 +41,6 @@ describe('@zazuko/formats-lazy/lazySink', () => {
       { foo: 'foo', baz: 'baz' },
     ])
   })
+
+  it('should throw when input is malformed')
 })

@@ -8,7 +8,7 @@
     "prepare": "husky install",
     "lint": "eslint . --quiet --ext .ts",
     "prepack": "tsc",
-    "test": "c8 --reporter=lcov --reporter=text mocha test/test.ts",
+    "test": "c8 --reporter=lcov --reporter=text mocha test/*.test.ts",
     "release": "changeset publish"
   },
   "files": [
@@ -87,7 +87,10 @@
     "typescript": "^5.0.2"
   },
   "mocha": {
-    "loader": "ts-node/esm"
+    "loader": "ts-node/esm",
+    "require": [
+      "test/mocha-setup.cjs"
+    ]
   },
   "lint-staged": {
     "*.{js,ts}": [

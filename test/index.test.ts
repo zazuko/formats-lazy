@@ -10,12 +10,12 @@ import { expect } from 'chai'
 import getStream from 'get-stream'
 import $rdf from 'rdf-ext'
 import { nquads, turtle } from '@tpluscode/rdf-string'
+import { Stream } from 'readable-stream'
 import formats from '../index.js'
 import * as all from '../index.js'
 import JsonLdSerializer from '../lib/CustomJsonLdSerializer.js'
 import RdfXmlParser from '../lib/CustomRdfXmlParser.js'
 import { LazySink } from '../LazySink.js'
-import 'chai-snapshot-matcher'
 
 const ex = namespace('https://example.com/')
 
@@ -128,6 +128,25 @@ describe('@zazuko/formats-lazy', () => {
       assert(expected.equals(actual))
     })
 
+    it('return null when given an unsupported format', () => {
+      // when
+      const stream = formats.parsers.import('text/plain', Readable.from(''))
+
+      // then
+      expect(stream).to.be.null
+    })
+
+    it('should throw when input is malformed', async () => {
+      // given
+      const invaliInput = Readable.from('foobar')
+
+      // then
+      await expect(
+        // when
+        getStream.array(<Stream>formats.parsers.import('text/turtle', invaliInput)),
+      ).to.eventually.be.rejectedWith(/^Unexpected "foobar" on line 1\.$/)
+    })
+
     testMediaType(formats.parsers, 'application/ld+json', '@rdfjs/parser-jsonld', JsonLdParser)
     testMediaType(formats.parsers, 'application/trig', '@rdfjs/parser-n3', N3Parser)
     testMediaType(formats.parsers, 'application/n-quads', '@rdfjs/parser-n3', N3Parser)
@@ -176,6 +195,14 @@ describe('@zazuko/formats-lazy', () => {
 
         expect(output).to.matchSnapshot(this)
       })
+    })
+
+    it('return null when given an unsupported format', () => {
+      // when
+      const stream = formats.serializers.import('text/plain', Readable.from([]))
+
+      // then
+      expect(stream).to.be.null
     })
 
     testMediaType(formats.serializers, 'application/ld+json', '@rdfjs/serializer-jsonld', JsonLdSerializer)

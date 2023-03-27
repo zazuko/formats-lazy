@@ -1,0 +1,10 @@
+exports["@zazuko/formats-lazy serializers should serialize application/ld+json"] = "[{\"@id\":\"https://example.com/Baz\",\"@graph\":{\"@id\":\"https://example.com/Foo\",\"https://example.com/bar\":\"123\"}}]";
+
+exports["@zazuko/formats-lazy serializers should serialize application/n-quads"] = "<https://example.com/Foo> <https://example.com/bar> \"123\" <https://example.com/Baz> .\n";
+
+exports["@zazuko/formats-lazy serializers should serialize application/n-triples"] = "<https://example.com/Foo> <https://example.com/bar> \"123\" .\n";
+
+exports["@zazuko/formats-lazy serializers should serialize text/n3"] = "<https://example.com/Foo> <https://example.com/bar> \"123\" .\n";
+
+exports["@zazuko/formats-lazy serializers should serialize text/turtle"] = "<https://example.com/Foo> <https://example.com/bar> \"123\" .\n";
+
