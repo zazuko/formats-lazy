@@ -43,7 +43,7 @@ Each of it is an instance of `SinkMap` with the most common RDF media types as k
 
 ```javascript
 import formats from '@zazuko/formats-lazy'
-import { Readable } from 'readable-stream'
+import { Readable } from 'stream'
 
 const input = Readable.from([`
   PREFIX s: <http://schema.org/>
