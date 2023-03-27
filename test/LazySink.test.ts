@@ -36,10 +36,10 @@ describe('@zazuko/formats-lazy/lazySink', () => {
     await getStream(<any>sink.import(Readable.from(''), { foo: 'foo', baz: 'baz' }))
 
     const realSink = await sink.load()
-    expect(realSink.import).to.have.been.calledWith([
+    expect(realSink.import).to.have.been.calledWith(
       sinon.match(Readable),
-      { foo: 'foo', baz: 'baz' },
-    ])
+      sinon.match({ foo: 'foo', baz: 'baz' }),
+    )
   })
 
   it('should throw when input is malformed')
