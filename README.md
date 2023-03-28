@@ -78,7 +78,7 @@ import formats from '@zazuko/formats-lazy'
 import { lazySink } from '@zazuko/formats-lazy/LazySink.js'
 
 export const LazyBinaryParser = lazySink(
-  async () => (await import('@example/bin-parser')).default
+  async () => (await import('@example/bin-parser')).BinaryParser
 )
 
 formats.parsers.set('application/octet-stream+rdf', new LazyBinaryParser())
