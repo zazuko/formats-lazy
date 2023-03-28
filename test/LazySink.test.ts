@@ -1,4 +1,5 @@
 import { Readable } from 'stream'
+import EventEmitter from 'events'
 import type { Sink } from '@rdfjs/types'
 import { expect } from 'chai'
 import sinon from 'sinon'
@@ -7,7 +8,7 @@ import { lazySink } from '../LazySink.js'
 
 describe('@zazuko/formats-lazy/lazySink', () => {
   class RealSink implements Sink<any, any> {
-    public import: any
+    public import: (str: EventEmitter, options?: Partial<Record<'foo' | 'bar' | 'baz', unknown>>) => EventEmitter
 
     constructor(public options?: Partial<Record<'foo' | 'bar' | 'baz', unknown>>) {
       this.import = sinon.stub().returns(Readable.from(''))

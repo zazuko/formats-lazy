@@ -1,9 +1,4 @@
-import type JsonLdParserImpl from '@rdfjs/parser-jsonld'
-import type N3ParserImpl from '@rdfjs/parser-n3'
-import type NTriplesSerializerImpl from '@rdfjs/serializer-ntriples'
 import SinkMap from '@rdfjs/sink-map'
-import type JsonLdSerializerImpl from './lib/CustomJsonLdSerializer.js'
-import type RdfXmlParserImpl from './lib/CustomRdfXmlParser.js'
 import { lazySink } from './LazySink.js'
 
 const parsers = new SinkMap()
@@ -14,11 +9,11 @@ const formats = {
   serializers,
 }
 
-const JsonLdParser = lazySink<typeof JsonLdParserImpl>(async () => (await import('@rdfjs/parser-jsonld')).default)
-const N3Parser = lazySink<typeof N3ParserImpl>(async () => (await import('@rdfjs/parser-n3')).default)
-const RdfXmlParser = lazySink<typeof RdfXmlParserImpl>(async () => (await import('./lib/CustomRdfXmlParser.js')).default)
-const NTriplesSerializer = lazySink<typeof NTriplesSerializerImpl>(async () => (await import('@rdfjs/serializer-ntriples')).default)
-const JsonLdSerializer = lazySink<typeof JsonLdSerializerImpl>(async () => (await import('./lib/CustomJsonLdSerializer.js')).default)
+const JsonLdParser = lazySink(async () => (await import('@rdfjs/parser-jsonld')).default)
+const N3Parser = lazySink(async () => (await import('@rdfjs/parser-n3')).default)
+const RdfXmlParser = lazySink(async () => (await import('./lib/CustomRdfXmlParser.js')).default)
+const NTriplesSerializer = lazySink(async () => (await import('@rdfjs/serializer-ntriples')).default)
+const JsonLdSerializer = lazySink(async () => (await import('./lib/CustomJsonLdSerializer.js')).default)
 
 formats.parsers.set('application/ld+json', new JsonLdParser())
 formats.parsers.set('application/trig', new N3Parser())
