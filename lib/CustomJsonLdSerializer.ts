@@ -1,7 +1,7 @@
-import JsonLdSerializer from '@rdfjs/serializer-jsonld'
+import JsonLdSerializer, { SerializerOptions } from '@rdfjs/serializer-jsonld'
 
 class CustomJsonLdSerializer extends JsonLdSerializer {
-  constructor({ ...args } = {}) {
+  constructor({ ...args }: SerializerOptions = {}) {
     super({ encoding: 'string', ...args })
   }
 }

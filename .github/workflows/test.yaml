@@ -8,7 +8,6 @@ jobs:
     strategy:
       matrix:
         node:
-          - '14'
           - '16'
           - '18'
     steps:
@@ -16,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-      - run: npm install
+      - run: npm ci
       - run: npm test
       - uses: codecov/codecov-action@v3
   lint:
@@ -26,5 +25,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm install
+      - run: npm ci
       - run: npm run lint
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - run: npx tsc --noEmit
