@@ -1,6 +1,6 @@
 {
   "name": "@zazuko/formats-lazy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Parsers and serializers for common RDF formats, loaded lazily",
   "type": "module",
   "main": "index.js",
