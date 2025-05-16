@@ -58,6 +58,7 @@
     "@types/chai-as-promised": "^7.1.5",
     "@types/chai-snapshot-matcher": "^1.0.1",
     "@types/mocha": "^10.0.1",
+    "@types/node": "^20",
     "@types/rdf-ext": "^2.5.2",
     "@types/rdfjs__namespace": "^2.0.10",
     "@types/readable-stream": "^2.3.15",

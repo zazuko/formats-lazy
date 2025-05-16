@@ -1,5 +1,5 @@
 import assert, { strictEqual } from 'assert'
-import { Readable } from 'stream'
+import { Readable } from 'node:stream'
 import type { Quad } from '@rdfjs/types'
 import JsonLdParser from '@rdfjs/parser-jsonld'
 import N3Parser from '@rdfjs/parser-n3'
@@ -10,7 +10,6 @@ import { expect } from 'chai'
 import getStream from 'get-stream'
 import $rdf from 'rdf-ext'
 import { nquads, turtle } from '@tpluscode/rdf-string'
-import { Stream } from 'readable-stream'
 import formats from '../index.js'
 import * as all from '../index.js'
 import JsonLdSerializer from '../lib/CustomJsonLdSerializer.js'
@@ -143,7 +142,7 @@ describe('@zazuko/formats-lazy', () => {
       // then
       await expect(
         // when
-        getStream.array(<Stream>formats.parsers.import('text/turtle', invaliInput)),
+        getStream.array(<Readable>formats.parsers.import('text/turtle', invaliInput)),
       ).to.eventually.be.rejectedWith(/^Unexpected "foobar" on line 1\.$/)
     })
 
