@@ -1,5 +1,11 @@
 # @zazuko/formats-lazy
 
+## 1.0.2
+
+### Patch Changes
+
+- 3a6e2ce: Updated dependencies to remove `@rdfjs/types` v1
+
 ## 1.0.1
 
 ### Patch Changes
