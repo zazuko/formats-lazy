@@ -4,12 +4,12 @@ on:
   - push
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node:
-          - '16'
-          - '18'
+          - 'lts/*'
+          - 'lts/-1'
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -19,20 +19,20 @@ jobs:
       - run: npm test
       - uses: codecov/codecov-action@v3
   lint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 'lts/*'
       - run: npm ci
       - run: npm run lint
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 'lts/*'
       - run: npm ci
       - run: npx tsc --noEmit
